@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Функции</title>
+</head>
+<body>
+    <script>
+      var add = function(a, b) {
+        return a + b;
+      }
+
+      // Шаблон вызова метода
+      var myObject = {
+        value: 0,
+        increment: function(inc) {
+          this.value += typeof inc === 'number' ? inc : 1;
+        }
+      };
+
+      myObject.increment();
+      document.writeln(myObject.value);
+
+      myObject.increment(2);
+      document.writeln(myObject.value);
+
+      //var sum = add(3, 4);
+      //document.writeln(sum);
+
+      // Шаблон вызова функции
+      myObject.double = function() {
+        var that = this;
+
+        var helper = function () {
+          //document.writeln(this.value);
+          that.value = add(that.value, that.value);
+        };
+
+        helper();
+      };
+
+      myObject.double();
+      document.writeln(myObject.value);
+
+      // Шаблон вызова конструктора
+      var Quo = function(string) {
+        this.status = string;
+      }
+
+      Quo.prototype.get_status = function () {
+        return this.status;
+      }
+
+      var myQuo = new Quo('confused');
+      document.writeln(myQuo.get_status());
+
+      //Шаблон вызова метода apply
+      var statusObject = {
+        status: 'A-OK'
+      }
+
+      var status = Quo.prototype.get_status.apply(statusObject);
+      document.writeln(status);
+    </script>
+</body>
+</html>
